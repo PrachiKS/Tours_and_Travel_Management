@@ -66,4 +66,12 @@ const startServer = async () => {
     }
 };
 
+// ✅ Handle port in use error gracefully
+process.on('uncaughtException', (err) => {
+    if (err.code === 'EADDRINUSE') {
+        console.log(`Port ${port} is busy. Try changing PORT in .env`)
+        process.exit(1)
+    }
+})
+
 startServer();
