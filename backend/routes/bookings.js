@@ -1,12 +1,28 @@
-import express from "express";
-
-import { verifyAdmin, verifyUser } from "../utils/verifyToken.js"
-import { createBooking , getAllBooking , getBooking } from "../controllers/bookingController.js"
+import express from 'express'
+import {
+    createBooking,
+    getBooking,
+    getAllBooking,
+    deleteBooking,
+    getDashboardStats
+} from '../controllers/bookingController.js'
+import { verifyAdmin, verifyUser } from '../utils/verifyToken.js'
 
 const router = express.Router()
 
-router.post('/',verifyUser, createBooking);
-router.get('/:id',verifyUser, getBooking);
-router.get('/',verifyAdmin, getAllBooking);
+// ✅ Dashboard stats - must be before /:id route
+router.get('/admin/dashboard', verifyAdmin, getDashboardStats)
 
-export default router;
+// Create booking
+router.post('/', verifyUser, createBooking)
+
+// Get single booking
+router.get('/:id', verifyUser, getBooking)
+
+// Get all bookings - admin only
+router.get('/', verifyAdmin, getAllBooking)
+
+// ✅ Delete booking - admin only
+router.delete('/:id', verifyAdmin, deleteBooking)
+
+export default router
