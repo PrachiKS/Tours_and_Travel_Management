@@ -80,6 +80,21 @@ app.use('/api/v1/review', reviewRoute)
 app.use('/api/v1/booking', bookingRoute)
 app.use('/api/v1/payment', paymentRoute)
 
+app.get('/', (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: 'Welcome to Bhraman Tours and Travels API 🌍',
+        version: '1.0.0',
+        endpoints: {
+            tours: '/api/v1/tours',
+            auth: '/api/v1/auth',
+            bookings: '/api/v1/booking',
+            users: '/api/v1/users',
+            payment: '/api/v1/payment'
+        }
+    })
+})
+
 // Database connection
 
 mongoose.set('strictQuery', false)
