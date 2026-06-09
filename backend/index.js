@@ -60,9 +60,10 @@ app.use(globalLimiter)
 // CORS
 
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: ['https://bhraman-tours.vercel.app', 'http://localhost:3000'],
     credentials: true
 }
+
 
 // Middleware
 
