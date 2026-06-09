@@ -16,7 +16,8 @@ import { verifyAdmin } from '../utils/verifyToken.js'
 
 const router = express.Router()
 
-// ✅ Specific routes MUST come before /:id route
+//Specific routes MUST come before /:id route
+
 router.get('/search/getTourBySearch', getTourBySearch)
 router.get('/search/getFeaturedTours', getFeaturedTour)
 router.get('/search/getTourCount', getTourCount)

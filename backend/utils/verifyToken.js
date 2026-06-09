@@ -31,14 +31,18 @@ const verifyToken = (req, res, next) => {
 
 export const verifyUser = (req, res, next) => {
     verifyToken(req, res, () => {
-        if (req.user.id === req.params.id || req.user.role === 'admin') {
-            next()
-        } else {
-            return res.status(403).json({
-                success: false,
-                message: 'You are not authorized to perform this action'
-            })
+        if (req.user.role === 'admin') {
+            return next()
         }
+
+        if (!req.params.id || req.user.id === req.params.id) {
+            return next()
+        }
+
+        return res.status(403).json({
+            success: false,
+            message: 'You are not authorized to perform this action'
+        })
     })
 }
 
